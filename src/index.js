@@ -8,8 +8,8 @@ mongoose.connect();
 const WebSocket = require("ws");
 const app = require("./config/express");
 const options = {
-  key: fs.readFileSync("./cert/server.key"),
-  cert: fs.readFileSync("certificate.crt"),
+  key: fs.readFileSync("src/cert/private-key.key"),
+  cert: fs.readFileSync("src/cert/certificate.crt"),
 };
 
 const server = require("https").createServer(options, app);
