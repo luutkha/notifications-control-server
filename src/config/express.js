@@ -29,16 +29,24 @@ app.use(compress());
 app.use(methodOverride());
 
 // secure apps by setting various HTTP headers
-// app.use(helmet());
+app.use(helmet());
 
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       connectSrc: ["'self'", "*"],
-//       // Add other directives as needed
-//     },
-//   })
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "*"],
+      styleSrc: ["'self'", "'unsafe-inline'", "*"],
+      imgSrc: ["*"],
+      connectSrc: ["*"],
+      fontSrc: ["*"],
+      objectSrc: ["*"],
+      mediaSrc: ["*"],
+      frameSrc: ["*"],
+      childSrc: ["*"],
+    },
+  })
+);
 
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
