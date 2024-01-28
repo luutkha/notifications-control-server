@@ -31,10 +31,23 @@ app.use(methodOverride());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "default-src": ["'self'"],
+      "connect-src": ["'self'", "'unsafe-inline'"],
+      "img-src": ["'self'", "data:"],
+      "style-src-elem": ["'self'", "data:"],
+      "script-src": ["'unsafe-inline'", "'self'"],
+      "object-src": ["'none'"],
+    },
+  })
+);
+
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
 // mount api v1 routes
 app.use("/v1", routes);
 
- module.exports = app;
+module.exports = app;

@@ -10,6 +10,7 @@ const http = require("http");
 const app = require("./config/express");
 const server = require("http").createServer(app);
 const Notification = require("./api/models/notification.model");
+
 //  new Notification({
 //    url: data.message,
 //    createdTime: data.createdTime,
