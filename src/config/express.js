@@ -31,14 +31,14 @@ app.use(methodOverride());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      connectSrc: ["'self'", "*"],
-      // Add other directives as needed
-    },
-  })
-);
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       connectSrc: ["'self'", "*"],
+//       // Add other directives as needed
+//     },
+//   })
+// );
 
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());

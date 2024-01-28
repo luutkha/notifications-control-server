@@ -1,14 +1,18 @@
 // make bluebird default Promise
 Promise = require("bluebird"); // eslint-disable-line no-global-assign
 const mongoose = require("./config/mongoose");
-
+const fs = require("fs");
 //socket
 mongoose.connect();
 
 const WebSocket = require("ws");
-const http = require("http");
 const app = require("./config/express");
-const server = require("http").createServer(app);
+const options = {
+  key: fs.readFileSync("./cert/server.key"),
+  cert: fs.readFileSync("certificate.crt"),
+};
+
+const server = require("https").createServer(options, app);
 const Notification = require("./api/models/notification.model");
 
 //  new Notification({
