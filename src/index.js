@@ -52,10 +52,9 @@ wss.on("connection", (ws) => {
 });
 
 const { port, env } = require("./config/vars");
-const hostname = "::";
 
 const logger = require("./config/logger");
-server.listen(port, hostname, () =>
+server.listen(port, () =>
   logger.info(`server started on port ${port} (${env})`)
 );
 /**
