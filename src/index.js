@@ -15,14 +15,10 @@ const options = {
 const server = require("http").createServer(options, app);
 const Notification = require("./api/models/notification.model");
 
-//  new Notification({
-//    url: data.message,
-//    createdTime: data.createdTime,
-//  }).save();
-
 const wss = new WebSocket.Server({ server });
 // WebSocket connection event
 wss.on("connection", (ws) => {
+  ws.on("error", console.error);
   console.log("Client connected");
 
   // WebSocket message event
