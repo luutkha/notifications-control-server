@@ -49,7 +49,7 @@ app.use(
 );
 
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors("*"));
 
 // mount api v1 routes
 app.use("/v1", routes);

@@ -4,8 +4,7 @@ const mongoose = require("./config/mongoose");
 const fs = require("fs");
 //socket
 mongoose.connect();
-
-const WebSocket = require("ws");
+const WebSocketServer = require("ws").Server;
 const app = require("./config/express");
 const options = {
   key: fs.readFileSync("src/cert/private-key.pem"),
@@ -15,17 +14,15 @@ const options = {
 const server = require("http").createServer(options, app);
 const Notification = require("./api/models/notification.model");
 
-const wss = new WebSocket.Server({ server });
-// WebSocket connection event
+const wss = new WebSocketServer({ server });
+
 wss.on("connection", (ws) => {
   ws.on("error", console.error);
   console.log("Client connected");
 
-  // WebSocket message event
   ws.on("message", (message) => {
     console.log(`Received message: ${message}`);
     if (JSON.parse(message).type && JSON.parse(message).type === "CONNECT") {
-      // ws.send(message);
     } else {
       console.log("Sending message");
       const data = JSON.parse(message);
@@ -37,11 +34,8 @@ wss.on("connection", (ws) => {
         }
       });
     }
-    // Echo the received message back to the client
-    // ws.send(`${message}`);
   });
 
-  // WebSocket close event
   ws.on("close", () => {
     console.log("Client disconnected");
   });
